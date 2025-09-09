@@ -29,8 +29,9 @@ jobs:
     - name: Run Playwright tests
       run: npx playwright test specs/login.test.js --project=chromium --reporter=html,allure-playwright
     
+    
     - name: Upload HTML report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: playwright-html-report
