@@ -1,0 +1,17 @@
+{
+  "name": "orangehrm-playwright-tests",
+  "version": "1.0.0",
+  "description": "Playwright tests for OrangeHRM login",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:login": "npx playwright test tests/specs/login.test.js",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug",
+    "test:report": "npx playwright test --reporter=html"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "allure-commandline": "^2.34.1",
+    "allure-playwright": "^3.3.3"
+  }
+}
