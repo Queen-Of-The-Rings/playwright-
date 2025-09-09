@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  playwright-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     
@@ -27,27 +27,18 @@ jobs:
       run: npx playwright install --with-deps
     
     - name: Run Playwright tests
-      run: npx playwright test specs/login.test.js --project=chromium --reporter=html,allure-playwright
-    
+      run: npx playwright test specs/login.test.js  --reporter=html --project=chromium
     
     - name: Upload HTML report
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v4  # CHANGED FROM v3 to v4
       if: always()
       with:
-        name: playwright-html-report
+        name: playwright-report
         path: playwright-report/
         retention-days: 30
     
-    - name: Upload Allure results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: allure-results
-        path: allure-results/
-        retention-days: 7
-    
     - name: Upload test results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4  # CHANGED FROM v3 to v4
       if: always()
       with:
         name: test-results
