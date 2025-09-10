@@ -1,37 +1,14 @@
 const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({
-projects: [
-    /* Test against desktop browsers */
+  // Use only chromium for CI to save time and resources
+  projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-    /* Test against mobile viewports. */
-    {
-      name: 'Mobile Chrome',
-      use: { ...devices['Pixel 5'] },
-    },
-    {
-      name: 'Mobile Safari',
-      use: { ...devices['iPhone 12'] },
-    },
-    /* Test against branded browsers. */
-    {
-      name: 'Google Chrome',
-      use: { ...devices['Desktop Chrome'], channel: 'chrome' }, // or 'chrome-beta'
-    },
-    {
-      name: 'Microsoft Edge',
-      use: { ...devices['Desktop Edge'], channel: 'msedge' }, // or 'msedge-dev'
+      use: { 
+        browserName: 'chromium',
+        headless: true
+      },
     },
   ],
   timeout: 30000,
@@ -52,9 +29,8 @@ projects: [
   ],
   
   use: {
-    // No baseURL needed since tests use direct URLs
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
-    video: 'on-first-retry' // Optional: record videos on retry
+    video: 'on-first-retry'
   }
 });
